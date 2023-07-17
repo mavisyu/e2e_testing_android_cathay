@@ -7,6 +7,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 public class AbstractAndroid extends SetUpAndroid{
 
@@ -33,6 +36,12 @@ public class AbstractAndroid extends SetUpAndroid{
         }catch (NoSuchElementException e){
             return false;
         }
+    }
+
+    protected void xpathAssertEquals(String xpath, String prop) {
+        getDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        String text = getDriver().findElementByXPath(xpath).getText();
+        assertEquals(prop, text);
     }
 
     protected String getFilePath() {
