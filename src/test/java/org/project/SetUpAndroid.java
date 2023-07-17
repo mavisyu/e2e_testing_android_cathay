@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,7 +24,7 @@ public class SetUpAndroid {
     public void setUp() throws Exception {
         InputStream input = new FileInputStream("config.properties");
         inprop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
-        File classpathRoot = new File(System.getProperty("user.dir"));
+        System.setProperty("webdriver.chrome.driver","webDriver/chromedriver");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", DEVICE_UDID);
@@ -38,7 +37,7 @@ public class SetUpAndroid {
     }
 
     @After
-    public void tearDown() throws Exception {
-//        driver.quit();
+    public void tearDown() {
+        driver.quit();
     }
 }
